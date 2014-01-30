@@ -1,0 +1,1 @@
+java -Xmx2048m -cp remoteresources.jar com.eldorado.remoteresources.RemoteResourcesServer %*

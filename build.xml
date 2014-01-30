@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="buildAll" name="Create Runnable Jar for Project RemoteResources with libraries in sub-folder" basedir=".">
+
+	<property file="build.properties" />
+	<path id="RemoteResources.classpath">
+		<pathelement location="bin" />
+		<pathelement location="libs/chimpchat.jar" />
+		<pathelement location="libs/ddmlib.jar" />
+		<pathelement location="libs/guavalib.jar" />
+		<pathelement location="libs/sdklib.jar" />
+		<pathelement location="libs/xz-1.1.jar" />
+	</path>
+
+	<target name="buildAll" depends="init_build_dir">
+		<antcall target="build"/>
+		<antcall target="build_jar"/>
+		<delete dir="${BUILD_DIR}"/>
+	</target>
+
+	<target name="init_build_dir" description="clean build dir">
+		<echo message="Initializing Build Directory" />
+		<delete dir="${BUILD_DIR}" failonerror="false"/>
+		<mkdir dir="${BUILD_DIR}"/>
+		<copy todir="${BUILD_DIR}">
+			<fileset dir="${basedir}" includes="**"/>
+		</copy>
+	</target>
+
+	<target name="build" depends="init">
+		<javac debug="true" debuglevel="${debuglevel}" destdir="${BUILD_DIR}/bin" includeantruntime="false" source="${source}" target="${target}">
+			<src path="${BUILD_DIR}/src" />
+			<classpath refid="RemoteResources.classpath" />
+		</javac>
+	</target>
+
+	<target name="init">
+		<mkdir dir="bin" />
+		<copy includeemptydirs="false" todir="bin">
+			<fileset dir="src">
+				<exclude name="**/*.java" />
+			</fileset>
+		</copy>
+	</target>
+
+	<target name="build_jar">
+		<mkdir dir="${OUTPUT_DIR}" />
+		<jar destfile="${OUTPUT_DIR}/remoteresources.jar">
+			<manifest>
+				<attribute name="Main-Class" value="com.eldorado.remoteresources.RemoteResources"/>
+				<attribute name="Class-Path" value=". libs/chimpchat.jar libs/ddmlib.jar libs/guavalib.jar libs/sdklib.jar libs/xz-1.1.jar"/>
+			</manifest>
+			<fileset dir="${BUILD_DIR}/bin"/>
+		</jar>
+		<delete dir="${OUTPUT_DIR}/libs"/>
+		<mkdir dir="${OUTPUT_DIR}/libs"/>
+		<copy file="${BUILD_DIR}/libs/chimpchat.jar" todir="${OUTPUT_DIR}/libs"/>
+		<copy file="${BUILD_DIR}/libs/ddmlib.jar" todir="${OUTPUT_DIR}/libs"/>
+		<copy file="${BUILD_DIR}/libs/guavalib.jar" todir="${OUTPUT_DIR}/libs"/>
+		<copy file="${BUILD_DIR}/libs/sdklib.jar" todir="${OUTPUT_DIR}/libs"/>
+		<copy file="${BUILD_DIR}/libs/xz-1.1.jar" todir="${OUTPUT_DIR}/libs"/>
+		<copy file="${BUILD_DIR}/remote.cfg" todir="${OUTPUT_DIR}"/>
+		<copy file="${BUILD_DIR}/LICENSE_NOTICES" todir="${OUTPUT_DIR}"/>
+		<copy todir="${OUTPUT_DIR}">
+			<fileset dir="${BUILD_DIR}/" includes="*.bat"/>
+		</copy>
+	</target>
+
+
+
+
+</project>

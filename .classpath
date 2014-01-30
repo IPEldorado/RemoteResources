@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="libs/chimpchat.jar"/>
+	<classpathentry kind="lib" path="libs/ddmlib.jar"/>
+	<classpathentry kind="lib" path="libs/guavalib.jar"/>
+	<classpathentry kind="lib" path="libs/sdklib.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="libs/xz-1.1.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:platform:/resource/RemoteResources/libs/xz-1.1-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

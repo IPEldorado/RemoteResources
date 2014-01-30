@@ -1,0 +1,36 @@
+Remote Resources Protocol Specification
+
+This is not a full specification, just a read-me for new developers.
+
+- Configuring environment
+	- Download Android Debug Bridge (adb)
+	- Create an environment variable ADB_PATH and set with your adb installation directory.
+	- Append ADB_PATH to environment variable PATH in your Operating System.
+	- Download Apache Ant from http://ant.apache.org/.
+	- Extract the zip file into a directory structure of your choice. Set the ANT_HOME environment variable to this location and include the ANT_HOME/bin directory in your path.
+	- Make sure that also the JAVA_HOME environment variable is set to the JDK. This is required for running Ant.
+	
+- Compiling the code from command-line
+	- Once the environment has been set up properly, just go to into RemoteResources directory and run the following command: ant buildAll
+	- If everything is ok, there will be a directory C:\tmp\remoteresources, which contains the binaries created during the build
+	
+- Running the application
+	- If the server is going to be accessed remotely, double-click on run_server.bat, otherwise, just click on run.bat, so the devices connected locally will be listed on remote.
+	
+- Server:
+	- Incoming messages are always replied with an acknowledge message with the same serial number (of incoming message).
+	- Acknowledges can carry specific data, e.g. SetupConnectionMessages acknowledge carries the address to client to connect to.
+	- Current implementation has 2 separate channels per server: one for control (used for all devices) and one for each connected device to transmit data.
+	- Current transmitted data is new screen frames only.
+	- Data messages sent by server are not acknowledge by the client (at least until now).
+	
+- Client:
+	- Incoming ACK messages are never replied.
+	- Connection to a server triggers a get device list event right after connection.
+	- Getting new frames shall be done through a device data received listener and not by receiving incoming data directly.
+	- Get screenshot (to save a screenshot) frame will come within the Ack response
+
+	
+For information, please, contact:
+Remote Resources Team
+Email address: app.eldorado@eldorado.org.br

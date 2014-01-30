@@ -1,0 +1,11 @@
+- improve server robustness.
+- improve client robustness.
+- poll server device changes through periodic get device list command./ actively notify client about device status changes (by sending a control message from server)
+- "just one connection" logic on servers (both for data and control).
+- auto configure server routers using upnp (weupnp).
+- secure connection through SSL.
+- verify server version
+- two way data transfers.
+- more data transfers (e.g pull/push files) 
+- send shell command
+- send data (like inputText) in the script actions 
